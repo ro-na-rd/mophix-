@@ -85,9 +85,12 @@ async function startServer() {
         await sequelize.authenticate();
         console.log('✓ Database connection established successfully');
 
-        // Sync models (set alter: true for development only)
-        await sequelize.sync({ alter: process.env.NODE_ENV === 'development' });
-        console.log('✓ Database models synchronized');
+        // Sync models
+        // NOTE: sequelize.sync({ alter: true }) can generate many FK/index operations and may hit
+        // MySQL limitations (e.g., max keys). For local dev, avoid alter and let migrations/seed handle changes.
+        await sequelize.sync({ alter: false });
+        console.log('✓ Database models synchronized (no alter)');
+
 
         // Start server
         app.listen(PORT, () => {

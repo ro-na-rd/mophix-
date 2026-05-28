@@ -11,8 +11,9 @@ const STATIC_SERVICES = [
     icon: '💍',
     description:
       'Your wedding day is a once-in-a-lifetime moment that deserves to be captured in every exquisite detail. Our wedding photographers blend editorial artistry with documentary storytelling to deliver timeless images you will treasure forever.',
-    starting_price: 4500000,
+    starting_price: 2000000,
     duration: 'Full Day (8–10 hrs)',
+
     highlight: 'Most Popular',
     features: ['Engagement pre-shoot', 'Two photographers', 'Same-day highlight preview', '400+ edited images'],
   },
@@ -23,7 +24,7 @@ const STATIC_SERVICES = [
     icon: '🤰',
     description:
       'Celebrate the miracle of new life with a luxurious maternity session. We create soft, artistic portraits that beautifully capture the glow of motherhood, creating a timeless visual story of this precious chapter.',
-    starting_price: 1200000,
+    starting_price: 'RWF 1,000,000',
     duration: '2–3 Hours',
     highlight: null,
     features: ['Indoor & outdoor options', 'Professional styling advice', 'Partner & family included', '80+ edited images'],
@@ -35,7 +36,7 @@ const STATIC_SERVICES = [
     icon: '👨‍👩‍👧‍👦',
     description:
       'Freeze this moment in time with stunning family portraits that capture your unique bond. From playful candids to elegant formal shots, we create images that tell your family story authentically.',
-    starting_price: 800000,
+    starting_price: 'RWF 1,500,000',
     duration: '1.5–2 Hours',
     highlight: null,
     features: ['All family sizes welcome', 'Multiple outfit changes', 'Studio or outdoor', '60+ edited images'],
@@ -47,7 +48,7 @@ const STATIC_SERVICES = [
     icon: '🎓',
     description:
       'Your academic achievement deserves to be immortalised. Our graduation photography sessions create powerful, celebratory portraits that you will be proud to share for years to come.',
-    starting_price: 600000,
+    starting_price: 'RWF 1,000,000',
     duration: '1–2 Hours',
     highlight: null,
     features: ['Multiple locations', 'Academic regalia shots', 'Casual & formal styles', '50+ edited images'],
@@ -59,7 +60,7 @@ const STATIC_SERVICES = [
     icon: '📸',
     description:
       'Our professional studio is equipped with premium lighting rigs, a variety of backdrops, and all the tools needed for flawless professional portraits, headshots, and creative concept shoots.',
-    starting_price: 400000,
+    starting_price: 'RWF 1,000,000',
     duration: '1–1.5 Hours',
     highlight: 'Best Value',
     features: ['Professional lighting setup', 'Multiple backdrops', 'Hair & makeup guidance', '40+ edited images'],
@@ -71,7 +72,7 @@ const STATIC_SERVICES = [
     icon: '🌿',
     description:
       "Kigali's breathtaking hills, gardens, and urban landscapes make the perfect backdrop for natural, vibrant photography. We scout the best locations to match your vision perfectly.",
-    starting_price: 500000,
+    starting_price: 'RWF 1,000,000',
     duration: '1.5–2 Hours',
     highlight: null,
     features: ["Premium Kigali locations", 'Golden hour scheduling', 'Natural light mastery', '60+ edited images'],
@@ -83,7 +84,7 @@ const STATIC_SERVICES = [
     icon: '🎉',
     description:
       'Corporate events, birthday celebrations, product launches, and cultural ceremonies — we provide comprehensive event photography that captures every important moment from start to finish.',
-    starting_price: 3200000,
+    starting_price: 'RWF 2,000,000',
     duration: 'Custom (4–12 hrs)',
     highlight: null,
     features: ['Dedicated event team', 'Quick 48-hr turnaround', 'Print-ready resolution', '300+ edited images'],
