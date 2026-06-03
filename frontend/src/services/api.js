@@ -133,6 +133,7 @@ export const bookingsService = {
   getAll: (params) => request('/bookings', { method: 'GET', params }),
   getById: (id) => request(`/bookings/${id}`, { method: 'GET' }),
   create: (data) => request('/bookings', { method: 'POST', body: data }),
+  cancel: (id) => request(`/bookings/${id}/cancel`, { method: 'PATCH' }),
   updateStatus: (id, status, notes) => request(`/bookings/${id}/status`, { method: 'PATCH', body: { status, notes } }),
   updatePaymentStatus: (id, payment_status) => request(`/bookings/${id}/payment`, { method: 'PATCH', body: { payment_status } }),
   uploadCompletedFile: (id, formData) => upload(`/bookings/${id}/completed-file`, formData),

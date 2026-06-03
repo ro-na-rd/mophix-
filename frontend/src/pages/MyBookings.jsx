@@ -38,21 +38,20 @@ const MyBookings = () => {
   const fetchBookings = async () => {
     setLoading(true);
     try {
-      const res = await bookingsService.getAll({ user_id: user?.user_id });
+      const res = await bookingsService.getAll();
       
-      // Robust data extraction to handle various API response formats
-      // It checks for results, data.results, or direct arrays.
-      const rows = 
-        (Array.isArray(res)) ? res :
-        (res?.results && Array.isArray(res.results)) ? res.results :
-        (res?.data && Array.isArray(res.data)) ? res.data :
-        (res?.data?.results && Array.isArray(res.data.results)) ? res.data.results :
-        (res?.data?.data && Array.isArray(res.data.data)) ? res.data.data :
+      // Backend returns: { success: true, data: [...], pagination: {...} }
+      const rows =
+        Array.isArray(res) ? res :
+        Array.isArray(res?.data) ? res.data :
+        Array.isArray(res?.results) ? res.results :
+        Array.isArray(res?.data?.results) ? res.data.results :
         [];
 
       setBookings(rows);
     } catch (err) {
       console.error('Failed to fetch bookings:', err);
+      toast.error('Failed to load bookings. Please refresh.');
     } finally {
       setLoading(false);
     }
@@ -70,14 +69,11 @@ const MyBookings = () => {
   const handleCancel = async (id) => {
     if (!window.confirm('Cancel this booking request?')) return;
     try {
-      await bookingsService.updateStatus(id, 'cancelled');
+      await bookingsService.cancel(id);
       setBookings(prev => prev.map(b => (b.booking_id === id || b.id === id) ? { ...b, status: 'cancelled' } : b));
-      toast.success('Booking cancelled');
-    } catch {
-      // Optimistic update for immediate UI feedback.
-      // For this to be persistent and visible to staff, the backend MUST successfully update the status.
-      setBookings(prev => prev.map(b => (b.booking_id === id || b.id === id) ? { ...b, status: 'cancelled' } : b));
-      toast.error('Failed to cancel booking on backend. Displaying optimistically as cancelled.');
+      toast.success('Booking cancelled successfully');
+    } catch (err) {
+      toast.error(err?.message || 'Failed to cancel booking');
     }
   };
 

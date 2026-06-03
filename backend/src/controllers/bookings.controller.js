@@ -37,7 +37,7 @@ const getAllBookings = async (req, res, next) => {
         const { count, rows } = await Booking.findAndCountAll({
             where,
             include: [
-                { model: User, attributes: ['user_id', 'first_name', 'last_name', 'email', 'phone'] },
+                { model: User, attributes: ['user_id', 'first_name', 'last_name', 'email'] },
                 { model: Service, attributes: ['service_id', 'name', 'price'] }
             ],
             offset: parseInt(offset),
@@ -317,6 +317,37 @@ const uploadCompletedFile = (req, res, next) => {
     });
 };
 
+// Client cancel their own booking
+const cancelBooking = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const booking = await Booking.findByPk(id);
+
+        if (!booking) {
+            return next(new AppError('Booking not found', 404));
+        }
+
+        // Clients can only cancel their own bookings
+        if (req.user.role === 'client' && booking.user_id !== req.user.user_id) {
+            return next(new AppError('Forbidden', 403));
+        }
+
+        if (!['pending', 'confirmed'].includes(booking.status)) {
+            return next(new AppError('Cannot cancel a booking that is already completed or cancelled', 400));
+        }
+
+        await booking.update({ status: 'cancelled' });
+
+        res.json({
+            success: true,
+            message: 'Booking cancelled successfully',
+            data: booking
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 // Client pay (instant success)
 const payBooking = async (req, res, next) => {
     try {
@@ -353,6 +384,7 @@ module.exports = {
     getBookingById,
     createBooking,
     updateBookingStatus,
+    cancelBooking,
     updatePaymentStatus,
     deleteBooking,
     getBookingsCalendar,

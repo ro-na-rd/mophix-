@@ -359,8 +359,10 @@ const Booking = sequelize.define('Booking', {
     notes: {
         type: DataTypes.TEXT
     },
-    // DB does not contain completed_file_url in your current dump.
-    // completed_file_url: { ... }
+    completed_file_url: {
+        type: DataTypes.STRING(500),
+        allowNull: true
+    },
 }, {
     tableName: 'bookings',
     timestamps: true

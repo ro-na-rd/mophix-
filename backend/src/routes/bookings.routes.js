@@ -13,6 +13,7 @@ router.get('/calendar/:month/:year', verifyToken, authorize('admin', 'staff'), b
 router.get('/', verifyToken, authorize('admin', 'staff', 'client'), bookingsController.getAllBookings);
 router.get('/:id', verifyToken, authorize('admin', 'staff', 'client'), bookingsController.getBookingById);
 router.patch('/:id/status', verifyToken, authorize('admin', 'staff'), bookingsController.updateBookingStatus);
+router.patch('/:id/cancel', verifyToken, authorize('client', 'admin', 'staff'), bookingsController.cancelBooking);
 router.patch('/:id/payment', verifyToken, authorize('admin', 'staff'), bookingsController.updatePaymentStatus);
 router.delete('/:id', verifyToken, authorize('client', 'admin'), bookingsController.deleteBooking);
 
